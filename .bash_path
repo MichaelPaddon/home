@@ -16,6 +16,7 @@ function path_insert() {
         if ! path_contains "$dir"; then
             PATH=$dir:$PATH
         fi
+    done
 }
 
 function path_append() {
@@ -23,6 +24,7 @@ function path_append() {
         if ! path_contains "$dir"; then
             PATH=$PATH:$dir
         fi
+    done
 }
 
 path_insert "$HOME/.cargo/bin"
