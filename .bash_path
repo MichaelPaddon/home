@@ -1,0 +1,29 @@
+function path_contains() {
+    local dir
+    for dir in "$@"; do
+        case :$PATH: in
+           *:$dir:*)
+               ;;
+           *)
+               return 1
+               ;;
+        esac
+    done
+}
+
+function path_insert() {
+    for dir in "$@"; do
+        if ! path_contains "$dir"; then
+            PATH=$dir:$PATH
+        fi
+}
+
+function path_append() {
+    for dir in "$@"; do
+        if ! path_contains "$dir"; then
+            PATH=$PATH:$dir
+        fi
+}
+
+path_insert "$HOME/.cargo/bin"
+path_insert "$HOME/.local/bin"
